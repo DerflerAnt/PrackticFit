@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PrackticFit.ViewModels"
+             x:Class="PrackticFit.Views.DashboardPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D12"
+             Title="Дашборд">
+
+    <Grid>
+        <!-- Фоновий градієнт закріплений зверху -->
+        <BoxView HeightRequest="350" VerticalOptions="Start" Opacity="0.15">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#A3E635" Offset="0.0" />
+                    <GradientStop Color="#0D0D12" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <ScrollView>
+            <VerticalStackLayout MaximumWidthRequest="600" HorizontalOptions="Center" Padding="30, 60, 30, 40" Spacing="35">
+                
+                <!-- Заголовок -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Сьогодні" FontSize="18" TextColor="#8E8E93" FontAttributes="Bold" TextTransform="Uppercase" CharacterSpacing="2" />
+                    <Label Text="Ваш прогрес" FontSize="42" FontAttributes="Bold" TextColor="#FFFFFF" />
+                    
+                    <!-- Повідомлення Ранок-Вечір -->
+                    <Border StrokeThickness="0" BackgroundColor="#26262A" StrokeShape="RoundRectangle 12" Padding="15,10" Margin="0,10,0,0" IsVisible="{Binding HasEveningWarning}">
+                        <Label Text="{Binding EveningAnalysisMessage}" FontSize="14" TextColor="#FFCC00" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Головна картка Калорій -->
+                <Border StrokeShape="RoundRectangle 32" StrokeThickness="1" Stroke="#2A2A35" BackgroundColor="#1C1C22">
+                    <!-- Тіні прибрані для стабільності на Android -->
+                    <VerticalStackLayout Padding="40" HorizontalOptions="Center" Spacing="20">
+                        <Label Text="ЗАЛИШИЛОСЬ" FontSize="14" FontAttributes="Bold" TextColor="#8E8E93" CharacterSpacing="3" HorizontalOptions="Center"/>
+                        
+                        <Label Text="{Binding Nutrition.RemainingCalories, FallbackValue='0'}" 
+                               FontSize="84" 
+                               FontAttributes="Bold" 
+                               HorizontalOptions="Center" 
+                               TextColor="#FFFFFF" />
+                        
+                        <Border StrokeShape="RoundRectangle 20" StrokeThickness="0" BackgroundColor="#25252D" Padding="15,8" HorizontalOptions="Center">
+                            <Label Text="{Binding Nutrition.CalorieGoal, StringFormat='Цільова норма: {0} ккал'}" FontSize="15" FontAttributes="Bold" TextColor="#A3E635" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Макронутрієнти (Адаптивна сітка) -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="МАКРОНУТРІЄНТИ" FontSize="14" FontAttributes="Bold" TextColor="#8E8E93" CharacterSpacing="2"/>
+                    
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
+                        <!-- Білки -->
+                        <Border Grid.Column="0" StrokeShape="RoundRectangle 24" StrokeThickness="1" Stroke="#2A2A35" BackgroundColor="#1C1C22" Padding="20">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Білки" TextColor="#FFFFFF" FontSize="14" FontAttributes="Bold" />
+                                <ProgressBar Progress="{Binding ProteinProgress}" ProgressColor="#FF3B30" HeightRequest="8" BackgroundColor="#2C2C35" />
+                                <Label Text="{Binding Nutrition.ProteinConsumed, StringFormat='{0}г'}" TextColor="#FFFFFF" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Nutrition.ProteinGoalG, StringFormat='/ {0}г'}" TextColor="#8E8E93" FontSize="12" Margin="0,-5,0,0"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Вуглеводи -->
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 24" StrokeThickness="1" Stroke="#2A2A35" BackgroundColor="#1C1C22" Padding="20">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Вугл" TextColor="#FFFFFF" FontSize="14" FontAttributes="Bold" />
+                                <ProgressBar Progress="{Binding CarbsProgress}" ProgressColor="#FFCC00" HeightRequest="8" BackgroundColor="#2C2C35" />
+                                <Label Text="{Binding Nutrition.CarbsConsumed, StringFormat='{0}г'}" TextColor="#FFFFFF" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Nutrition.CarbsGoalG, StringFormat='/ {0}г'}" TextColor="#8E8E93" FontSize="12" Margin="0,-5,0,0"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- Жири -->
+                        <Border Grid.Column="2" StrokeShape="RoundRectangle 24" StrokeThickness="1" Stroke="#2A2A35" BackgroundColor="#1C1C22" Padding="20">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Жири" TextColor="#FFFFFF" FontSize="14" FontAttributes="Bold" />
+                                <ProgressBar Progress="{Binding FatsProgress}" ProgressColor="#34C759" HeightRequest="8" BackgroundColor="#2C2C35" />
+                                <Label Text="{Binding Nutrition.FatsConsumed, StringFormat='{0}г'}" TextColor="#FFFFFF" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding Nutrition.FatsGoalG, StringFormat='/ {0}г'}" TextColor="#8E8E93" FontSize="12" Margin="0,-5,0,0"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!-- Водний баланс -->
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="ГІДРАТАЦІЯ" FontSize="14" FontAttributes="Bold" TextColor="#8E8E93" CharacterSpacing="2"/>
+                    <Border StrokeShape="RoundRectangle 24" StrokeThickness="1" Stroke="#2A2A35" BackgroundColor="#1C1C22" Padding="20">
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+                            <Label Grid.Column="0" Text="💧" FontSize="40" VerticalOptions="Center" Margin="0,0,15,0"/>
+                            
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
+                                <Label Text="Вода за сьогодні" TextColor="#FFFFFF" FontSize="16" FontAttributes="Bold" />
+                                <Label Text="{Binding WaterConsumedMl, StringFormat='{0} мл / 2000 мл'}" TextColor="#00A2FF" FontSize="14" FontAttributes="Bold" />
+                            </VerticalStackLayout>
+
+                            <HorizontalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="10">
+                                <Button Text="-" Command="{Binding RemoveWaterCommand}" BackgroundColor="#2C2C35" TextColor="#FFFFFF" CornerRadius="15" WidthRequest="45" HeightRequest="45" FontSize="20" FontAttributes="Bold" Padding="0"/>
+                                <Label Text="{Binding WaterGlasses}" FontSize="20" FontAttributes="Bold" TextColor="#FFFFFF" VerticalOptions="Center" Margin="5,0"/>
+                                <Button Text="+" Command="{Binding AddWaterCommand}" BackgroundColor="#00A2FF" TextColor="#FFFFFF" CornerRadius="15" WidthRequest="45" HeightRequest="45" FontSize="20" FontAttributes="Bold" Padding="0"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Журнал Харчування -->
+                <VerticalStackLayout Spacing="15">
+                    <Grid>
+                        <Label Text="ЖУРНАЛ ПРИЙОМІВ" FontSize="14" FontAttributes="Bold" TextColor="#8E8E93" CharacterSpacing="2" VerticalOptions="Center"/>
+                        <Button Text="+ Додати" Command="{Binding AddSnackCommand}" BackgroundColor="Transparent" TextColor="#A3E635" FontAttributes="Bold" HorizontalOptions="End" Padding="0" HeightRequest="30" FontSize="14" />
+                    </Grid>
+
+                    <CollectionView ItemsSource="{Binding Meals}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 20" Margin="0,0,0,10" Padding="15">
+                                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding Product.Name}" FontSize="16" FontAttributes="Bold" TextColor="#FFFFFF" />
+                                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding ConsumedAt, StringFormat='{0:HH:mm}'}" FontSize="12" TextColor="#8E8E93" Margin="0,5,0,0" />
+                                        
+                                        <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+                                            <Label Text="{Binding CaloriesTotal, StringFormat='{0} ккал'}" FontSize="16" FontAttributes="Bold" TextColor="#A3E635" HorizontalOptions="End" />
+                                            <Label Text="{Binding QuantityGrams, StringFormat='{0}г'}" FontSize="12" TextColor="#8E8E93" HorizontalOptions="End" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <!-- Заглушка, якщо список пустий -->
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="40" Spacing="10">
+                                <Label Text="🍽️" FontSize="48" HorizontalOptions="Center" />
+                                <Label Text="Журнал порожній" FontSize="16" TextColor="#8E8E93" FontAttributes="Bold" HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

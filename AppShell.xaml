@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="PrackticFit.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PrackticFit"
+    xmlns:views="clr-namespace:PrackticFit.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="PrackticFit">
+
+    <!-- Змінюємо стиль нижньої панелі вкладок -->
+    <Shell.TabBarBackgroundColor>#0D0D12</Shell.TabBarBackgroundColor>
+    <Shell.TabBarUnselectedColor>#8E8E93</Shell.TabBarUnselectedColor>
+    <Shell.TabBarTitleColor>#A3E635</Shell.TabBarTitleColor>
+
+    <TabBar>
+        <Tab Title="Дашборд" Route="DashboardPage">
+            <ShellContent ContentTemplate="{DataTemplate views:DashboardPage}" />
+        </Tab>
+        <Tab Title="Пошук їжі" Route="SearchPage">
+            <ShellContent ContentTemplate="{DataTemplate views:SearchPage}" />
+        </Tab>
+        <Tab Title="Профіль" Route="ProfilePage">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>

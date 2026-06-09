@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PrackticFit.ViewModels"
+             x:Class="PrackticFit.Views.ProfilePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D12"
+             Title="Профіль">
+
+    <Grid>
+        <!-- Фоновий градієнт закріплений зверху -->
+        <BoxView HeightRequest="300" VerticalOptions="Start" Opacity="0.10">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#A3E635" Offset="0.0" />
+                    <GradientStop Color="#0D0D12" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <ScrollView>
+            <VerticalStackLayout Padding="30, 60, 30, 40" Spacing="25" MaximumWidthRequest="500" HorizontalOptions="Center">
+                
+                <Label Text="Антропометрія" FontSize="36" FontAttributes="Bold" TextColor="#FFFFFF" />
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Ім'я" TextColor="#8E8E93" FontSize="14" FontAttributes="Bold" Margin="5,0,0,0"/>
+                    <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 16" Padding="20,5">
+                        <Entry Text="{Binding Name}" TextColor="#FFFFFF" BackgroundColor="Transparent" FontSize="18" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <VerticalStackLayout Spacing="8" Grid.Column="0">
+                        <Label Text="Вага (кг)" TextColor="#8E8E93" FontSize="14" FontAttributes="Bold" Margin="5,0,0,0"/>
+                        <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 16" Padding="20,5">
+                            <Entry Text="{Binding Weight}" Keyboard="Numeric" TextColor="#FFFFFF" BackgroundColor="Transparent" FontSize="18" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8" Grid.Column="1">
+                        <Label Text="Зріст (см)" TextColor="#8E8E93" FontSize="14" FontAttributes="Bold" Margin="5,0,0,0"/>
+                        <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 16" Padding="20,5">
+                            <Entry Text="{Binding Height}" Keyboard="Numeric" TextColor="#FFFFFF" BackgroundColor="Transparent" FontSize="18" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Вік" TextColor="#8E8E93" FontSize="14" FontAttributes="Bold" Margin="5,0,0,0"/>
+                    <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 16" Padding="20,5">
+                        <Entry Text="{Binding Age}" Keyboard="Numeric" TextColor="#FFFFFF" BackgroundColor="Transparent" FontSize="18" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 24" Padding="25" Margin="0, 15, 0, 0">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="МЕТАБОЛІЗМ" FontSize="14" FontAttributes="Bold" CharacterSpacing="2" TextColor="#8E8E93" />
+                        
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto, Auto" RowSpacing="15">
+                            <Label Grid.Row="0" Grid.Column="0" Text="Базальний рівень (BMR)" TextColor="#FFFFFF" FontSize="16" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding BMR, StringFormat='{0} ккал'}" TextColor="#A3E635" FontSize="16" FontAttributes="Bold" />
+                            
+                            <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="#2A2A35" />
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="Добова норма (TDEE)" TextColor="#FFFFFF" FontSize="16" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding TDEE, StringFormat='{0} ккал'}" TextColor="#A3E635" FontSize="16" FontAttributes="Bold" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Зберегти зміни" 
+                        Command="{Binding SaveCommand}"
+                        TextColor="#0D0D12" 
+                        FontAttributes="Bold" 
+                        FontSize="18"
+                        CornerRadius="25" 
+                        HeightRequest="65"
+                        Margin="0, 20, 0, 0">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#A3E635" Offset="0.0" />
+                            <GradientStop Color="#78C21B" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

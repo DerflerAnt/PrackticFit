@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PrackticFit.ViewModels"
+             x:Class="PrackticFit.Views.SearchPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D12"
+             Title="Пошук">
+
+    <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *">
+        
+        <!-- Фоновий градієнт -->
+        <BoxView Grid.Row="0" Grid.RowSpan="3" HeightRequest="250" VerticalOptions="Start" Opacity="0.10">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#A3E635" Offset="0.0" />
+                    <GradientStop Color="#0D0D12" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <!-- Заголовок -->
+        <Label Grid.Row="0" Text="Пошук продуктів" FontSize="36" FontAttributes="Bold" TextColor="#FFFFFF" Margin="30,60,30,20" />
+
+        <!-- Пошуковий рядок -->
+        <Border Grid.Row="1" BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 20" Padding="10,2" Margin="30,0,30,25">
+            <SearchBar Placeholder="Пошук..." 
+                       Text="{Binding SearchQuery}"
+                       TextColor="#FFFFFF" 
+                       PlaceholderColor="#8E8E93" 
+                       BackgroundColor="Transparent"
+                       CancelButtonColor="#A3E635" />
+        </Border>
+
+        <!-- Список з незалежним скролом -->
+        <CollectionView Grid.Row="2" ItemsSource="{Binding FilteredProducts}" SelectionMode="None" Margin="30,0,30,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#1C1C22" StrokeThickness="1" Stroke="#2A2A35" StrokeShape="RoundRectangle 24" Margin="0,0,0,15" Padding="20">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="#FFFFFF" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Category, TargetNullValue='Без категорії', FallbackValue='Без категорії'}" FontSize="14" TextColor="#A3E635" Margin="0,5,0,0" />
+                            
+                            <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="4">
+                                <Label Text="{Binding Calories, StringFormat='{0} ккал'}" FontSize="20" FontAttributes="Bold" TextColor="#FFFFFF" HorizontalOptions="End" />
+                                
+                                <HorizontalStackLayout Spacing="8" HorizontalOptions="End">
+                                    <Label Text="{Binding Protein, StringFormat='Б:{0}'}" FontSize="12" TextColor="#8E8E93" />
+                                    <Label Text="{Binding Fats, StringFormat='Ж:{0}'}" FontSize="12" TextColor="#8E8E93" />
+                                    <Label Text="{Binding Carbs, StringFormat='В:{0}'}" FontSize="12" TextColor="#8E8E93" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
