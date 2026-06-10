@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrackticFit", "PrackticFit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrackticFit.Api", "PrackticFit.Api\PrackticFit.Api.csproj", "{DF93B508-0C2D-4C4E-BAAA-3ED8716326B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrackticFit.Tests", "PrackticFit.Tests\PrackticFit.Tests.csproj", "{9723A5EE-5D0B-486B-9262-365A62F60002}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,18 @@ Global
 		{DF93B508-0C2D-4C4E-BAAA-3ED8716326B4}.Release|x64.Build.0 = Release|Any CPU
 		{DF93B508-0C2D-4C4E-BAAA-3ED8716326B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{DF93B508-0C2D-4C4E-BAAA-3ED8716326B4}.Release|x86.Build.0 = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|x64.Build.0 = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Debug|x86.Build.0 = Debug|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|x64.ActiveCfg = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|x64.Build.0 = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|x86.ActiveCfg = Release|Any CPU
+		{9723A5EE-5D0B-486B-9262-365A62F60002}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
